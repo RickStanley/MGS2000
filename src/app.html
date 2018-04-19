@@ -1,0 +1,25 @@
+<template>
+  <div class="behalter">
+    <h1>${pageTitle}</h1>
+    <!-- <div class="lager">
+      <h3>Informações gerais
+        <div class="symbole"></div>
+      </h3>
+      <label>Teste
+        <input type="text" name="teste">
+      </label>
+    </div> -->
+    <div class="lager" repeat.for="einstellung of einstellungen">
+      <h3>
+        ${einstellung.title}
+      </h3>
+      <label repeat.for="feld of einstellung.lager" if.bind="feld.showInput">
+        ${feld.etikette}
+        <input type="text" keyup.delegate="updateMeta(this)">
+      </label>
+    </div>
+  </div>
+  <pre class="ausgabe" ref="aus">
+  </pre>
+  ${high()}
+</template>
