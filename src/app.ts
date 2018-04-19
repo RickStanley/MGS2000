@@ -1,5 +1,6 @@
 import './resources/scss/app.scss';
 import highlight from './resources/modules/satzstellungmarkieren';
+import Meta from "./resources/models/meta";
 
 export class App {
   aus: HTMLElement;
@@ -166,12 +167,20 @@ export class App {
         }
       ]
     }
-  ]
+  ];
+  metas: Array<any>;
+  constructor () {
+    Promise.all(this.einstellungen.map(async einstellung => {
+      for (const meta of einstellung.lager) {
+        meta['meta'] = new Meta(meta.eingang, meta.verbreitet);
+      }
+    }));
+  }
   komment(text: string) {
     return `<!-- ${text} -->`
   }
-  updateMeta(self) {
-    console.log(this);
+  updateMeta(obj) {
+    console.log('obj: ', obj);
   }
   high() {
     highlight(this.aus, 'html');

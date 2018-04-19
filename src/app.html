@@ -15,7 +15,7 @@
       </h3>
       <label repeat.for="feld of einstellung.lager" if.bind="feld.showInput">
         ${feld.etikette}
-        <input type="text" keyup.delegate="updateMeta(this)">
+        <input type="text" keyup.delegate="updateMeta(feld)">
       </label>
     </div>
   </div>
