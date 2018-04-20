@@ -3,27 +3,57 @@ interface Paar {
   inhalt?: string;
 }
 export default class Meta {
-  angabe: {
+  _prafix: {
     typ: string;
     typWert: string;
   };
-  inhalt: string;
-  vorlage: string;
-  verbreitet: string;
+  _inhalt: string;
+  _angabe: string;
+  _verbreitet: string;
+  _mittel: string;
+  _ende: string;
   constructor(pair: Paar, verbreitet?: string) {
-    this.angabe = {
+    this._prafix = {
       typ: '',
       typWert: ''
     };
-    this.verbreitet = verbreitet || '';
+    this._verbreitet = verbreitet || '';
     if (pair && Object.keys(pair)[0] && Object.keys(pair)[0] !== 'inhalt') {
-      this.angabe.typ = Object.keys(pair)[0];
-      this.angabe.typWert = Object.values(pair)[0];
+      this._prafix.typ = Object.keys(pair)[0];
+      this._prafix.typWert = Object.values(pair)[0];
     }
-    this.inhalt = pair && pair.inhalt ? pair.inhalt : '';
-    this.vorlage = `<meta ${(this.angabe && this.angabe.typ !== '') ? `${this.angabe.typ}="${this.angabe.typWert}"` : ''} content="${this.inhalt}">`
+    this._inhalt = pair && pair.inhalt ? pair.inhalt : '';
+    this._angabe = `<meta ${(this._prafix && this._prafix.typ !== '') ? this._prafix.typ + '=' : ''}`;
+    this._mittel = ` ${this._inhalt === 'utf-8' ? 'charset' : 'content'}=`;
+    this._ende = '>';
   }
-  aktualisierenInhalt(text):void {
-    this.inhalt = text;
+
+  public set inhalt(v: string) {
+    this._inhalt = v;
   }
+
+  public get mittel(): string {
+    return this._mittel;
+  }
+
+  public get ende(): string {
+    return this._ende;
+  }
+
+  public get prafix(): object {
+    return this._prafix;
+  }
+
+  public get angabe(): string {
+    return this._angabe;
+  }
+
+  public get inhalt(): string {
+    return this._inhalt;
+  }
+
+  public get verbreitet(): string {
+    return this._verbreitet;
+  }
+
 }
