@@ -23,7 +23,7 @@ export default class Meta {
     this.inhalt = pair && pair.inhalt ? pair.inhalt : '';
     this.vorlage = `<meta ${(this.angabe && this.angabe.typ !== '') ? `${this.angabe.typ}="${this.angabe.typWert}"` : ''} content="${this.inhalt}">`
   }
-  aktualisierenInhalt(text) {
+  aktualisierenInhalt(text):void {
     this.inhalt = text;
   }
 }
