@@ -225,7 +225,7 @@ export class App {
       lager: [
         {
           eingang: {
-            name: 'og:title'
+            name: 'twitter:title'
           },
           verbreitet: 'title',
           eingabeAnzeigen: false,
@@ -234,7 +234,7 @@ export class App {
         },
         {
           eingang: {
-            name: 'og:description'
+            name: 'twitter:description'
           },
           verbreitet: 'description',
           eingabeAnzeigen: false,
