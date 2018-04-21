@@ -19,7 +19,7 @@ interface Lager {
   isMeta: boolean;
   fuhrer?: boolean;
 }
-interface Metaeinstellungen {
+interface Standardeinstellugen {
   title: string;
   komment: string;
   lager: Array<Lager>;
@@ -27,7 +27,7 @@ interface Metaeinstellungen {
 export class App {
   aus: HTMLElement;
   pageTitle = 'MTG 2000';
-  metaeinstellungen: Array<Metaeinstellungen> = [
+  standardeinstellungen: Array<Standardeinstellugen> = [
     {
       title: 'Configurações Gerais',
       komment: this.komment('COMMON TAGS & Search Engine & Schema.org para Google'),
@@ -130,7 +130,7 @@ export class App {
           etikette: 'Imagem de Pré-visualização',
           platzhalter: 'https://www.zumbeispiele.com/logo.jpg',
           darunter: {
-            text: 'Dimensões recomendadas: 1200px x 630px; dimensão mínima: 600px x 315px'
+            text: 'Dimensão recomendada: 1200px x 630px; dimensão mínima: 600px x 315px'
           },
           eingang: {
             name: 'og:image'
@@ -140,7 +140,7 @@ export class App {
         },
         {
           etikette: 'URL',
-          platzhalter: 'https://zumbeispiele.com',          
+          platzhalter: 'https://zumbeispiele.com',
           eingang: {
             name: 'og:url'
           },
@@ -149,7 +149,7 @@ export class App {
         },
         {
           etikette: 'Nome do Site',
-          platzhalter: 'Site Exemplo',          
+          platzhalter: 'Site Exemplo',
           eingang: {
             name: 'og:site_name'
           },
@@ -158,7 +158,7 @@ export class App {
         },
         {
           etikette: 'Locale',
-          platzhalter: 'pt_BR',          
+          platzhalter: 'pt_BR',
           eingang: {
             name: 'og:locale'
           },
@@ -167,7 +167,7 @@ export class App {
         },
         {
           etikette: 'Vídeo',
-          platzhalter: 'https://www.zumbeispiele.com/video.avi',          
+          platzhalter: 'https://www.zumbeispiele.com/video.avi',
           eingang: {
             name: 'og:video'
           },
@@ -189,11 +189,11 @@ export class App {
         },
         {
           etikette: 'App ID',
-          platzhalter: 'App ID Facebook',      
+          platzhalter: 'App ID Facebook',
           darunter: {
             link: 'https://developers.facebook.com/apps/',
             text: 'Encontre seu Facebook App ID aqui'
-          },    
+          },
           eingang: {
             name: 'fb:app_id'
           },
@@ -243,7 +243,7 @@ export class App {
         },
         {
           etikette: 'Alça do Editor',
-          platzhalter: '@editor_alça',          
+          platzhalter: '@editor_alça',
           eingang: {
             name: 'twitter:site'
           },
@@ -252,7 +252,7 @@ export class App {
         },
         {
           etikette: 'Alça do autor do artigo',
-          platzhalter: '@autor_alça',          
+          platzhalter: '@autor_alça',
           eingang: {
             name: 'twitter:creator'
           },
@@ -273,10 +273,10 @@ export class App {
         },
         {
           etikette: 'Fonte de Video/Audio Player',
-          platzhalter: 'https://www.youtube.com/embed/Vhh_GeBPOhs',     
+          platzhalter: 'https://www.youtube.com/embed/Vhh_GeBPOhs',
           darunter: {
             text: 'HTTPS URL para um playr iFrame'
-          },     
+          },
           eingang: {
             name: 'twitter:player'
           },
@@ -296,7 +296,7 @@ export class App {
   ];
 
   constructor() {
-    Promise.all(this.metaeinstellungen.map(async einstellung => {
+    Promise.all(this.standardeinstellungen.map(async einstellung => {
       try {
         await Promise.all(einstellung.lager.map(async feld => feld.objekt = feld.isMeta ? new Meta(feld.eingang, feld.verbreitet) : new Allgemeines(feld.eingang)));
       } catch (error) { console.error(error) }
@@ -307,11 +307,22 @@ export class App {
   }
   async checkVerwandte(obj: Lager): Promise<void> {
     if (obj.fuhrer) {
-      Promise.all(this.metaeinstellungen.map(async einstellung => {
+      Promise.all(this.standardeinstellungen.map(async einstellung => {
         await Promise.all(einstellung.lager.map(async feld => {
           if (!feld.fuhrer && feld.verbreitet === obj.verbreitet) feld.objekt.inhalt = obj.objekt.inhalt;
         }));
       }));
+    }
+  }
+  kopieren(self: HTMLElement): void {
+    let range = document.createRange();
+    range.selectNodeContents(this.aus);
+    let sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    if (document.execCommand('copy')) {
+      self.classList.add('kopiert');
+      setTimeout(() => self.classList.remove('kopiert'), 1500);
     }
   }
 }

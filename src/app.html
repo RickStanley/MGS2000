@@ -1,15 +1,7 @@
 <template>
   <div class="behalter">
     <h1>${pageTitle}</h1>
-    <!-- <div class="lager">
-      <h3>Informações gerais
-        <div class="symbole"></div>
-      </h3>
-      <label>Teste
-        <input type="text" name="teste">
-      </label>
-    </div> -->
-    <div class="lager" repeat.for="einstellung of metaeinstellungen">
+    <div class="lager" repeat.for="einstellung of standardeinstellungen">
       <h3>
         ${einstellung.title}
       </h3>
@@ -20,10 +12,13 @@
       </label>
     </div>
   </div>
-  <pre class="ausgabe" ref="aus">
-    <template repeat.for="einstellung of metaeinstellungen"><span class="kommentar">${einstellung.komment}</span>
-      <template repeat.for="feld of einstellung.lager">${feld.objekt.angabe}<span class="meta-content" if.bind="feld.isMeta && feld.objekt.prafix.typWert != ''">"${feld.objekt.prafix.typWert}"</span>${feld.objekt.mittel}<span class="meta-content" if.bind="feld.isMeta">"${feld.objekt.inhalt}"</span><span class="default" if.bind="!feld.isMeta">${feld.objekt.inhalt}</span>${feld.objekt.ende}
+  <div class="ausgabebehalter">
+    <pre class="ausgabe" ref="aus">
+      <template repeat.for="einstellung of standardeinstellungen"><span class="kommentar">${einstellung.komment}</span>
+        <template repeat.for="feld of einstellung.lager">${feld.objekt.angabe}<span class="meta-content" if.bind="feld.isMeta && feld.objekt.prafix.typWert != ''">"${feld.objekt.prafix.typWert}"</span>${feld.objekt.mittel}<span class="meta-content" if.bind="feld.isMeta">"${feld.objekt.inhalt}"</span><span class="default" if.bind="!feld.isMeta">${feld.objekt.inhalt}</span>${feld.objekt.ende}
+        </template>
       </template>
-    </template>
-  </pre>
+    </pre>
+    <button class="copy" click.trigger="kopieren($event.target)">Copiar</button>
+  </div>
 </template>
