@@ -14,8 +14,12 @@
   </div>
   <div class="ausgabebehalter">
     <pre class="ausgabe" ref="aus">
-      <template repeat.for="einstellung of standardeinstellungen"><span class="kommentar">${einstellung.komment}</span>
-        <template repeat.for="feld of einstellung.lager">${feld.objekt.angabe}<span class="meta-content" if.bind="feld.isMeta && feld.objekt.prafix.typWert != ''">"${feld.objekt.prafix.typWert}"</span>${feld.objekt.mittel}<span class="meta-content" if.bind="feld.isMeta">"${feld.objekt.inhalt}"</span><span class="default" if.bind="!feld.isMeta">${feld.objekt.inhalt}</span>${feld.objekt.ende}
+      <template repeat.for="einstellung of standardeinstellungen">
+        <span class="kommentar">${einstellung.komment}</span>
+        <template repeat.for="feld of einstellung.lager">
+          <span class="wrapper" css="display: ${feld.objekt.inhalt != '' ? 'block' : 'none'};opacity: ${feld.objekt.inhalt != '' ? '1' : '0'};">
+              ${feld.objekt.angabe}<span class="meta-content" if.bind="feld.isMeta && feld.objekt.prafix.typWert != ''">"${feld.objekt.prafix.typWert}"</span>${feld.objekt.mittel}<span class="meta-content" if.bind="feld.isMeta">"${feld.objekt.inhalt}"</span><span class="default" if.bind="!feld.isMeta">${feld.objekt.inhalt}</span>${feld.objekt.ende}
+          </span>
         </template>
       </template>
     </pre>

@@ -1,6 +1,7 @@
 import './resources/scss/app.scss';
 import Meta from "./resources/models/meta";
 import Allgemeines from 'resources/models/Allgemeines';
+import { RouterConfiguration, Router } from "aurelia-router";
 
 interface Lager {
   etikette?: string;
@@ -294,7 +295,14 @@ export class App {
       ]
     }
   ];
-
+  router: Router;
+  configureRouter(config: RouterConfiguration, router: Router): void {
+    this.router = router;
+    config.title = 'Meta Tags Generator 2000';
+    config.map([
+      { route: ['', 'home'], name: 'home', moduleId: './app' }
+    ]);
+  }
   constructor() {
     Promise.all(this.standardeinstellungen.map(async einstellung => {
       try {

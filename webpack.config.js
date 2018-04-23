@@ -13,7 +13,7 @@ const when = (condition, config, negativeConfig) =>
   condition ? ensureArray(config) : ensureArray(negativeConfig);
 
 // primary config:
-const title = 'Aurelia Navigation Skeleton';
+const title = 'Meta Tag Generator 2000';
 const outDir = path.resolve(__dirname, project.platform.output);
 const srcDir = path.resolve(__dirname, 'src');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
@@ -106,7 +106,8 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       }
     }),
     ...when(extractCss, new ExtractTextPlugin({
-      filename: production ? '[contenthash].css' : '[id].css',
+      filename: production ? '[md5:contenthash:hex:20].css' : '[id].css',
+      // original: [contenthash]
       allChunks: true
     })),
     ...when(production, new CopyWebpackPlugin([

@@ -107,7 +107,8 @@ div.ausgabebehalter {
     font-size: 0.85rem;
     padding: .8rem 1rem;
     background-color: #1d1f21;
-    white-space: pre-line;
+    // white-space: pre-line;
+    white-space: normal;
     span {
       &.kommentar {
         color: #969896;
@@ -118,6 +119,11 @@ div.ausgabebehalter {
       }
       &.default {
         color: white;
+      }
+      &.wrapper {
+        transition: opacity .2s ease;
+        opacity: 0;
+        display: block;
       }
     }
   }
