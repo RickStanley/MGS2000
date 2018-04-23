@@ -30,12 +30,16 @@ pre {
 
 div.behalter {
   //   max-width: 600px;
-  vertical-align: top;
-  width: 90%;
   max-width: 600px;
   margin: 0 auto;
-  display: inline-block;
   text-align: left;
+  width: 90%;
+  display: block;
+  @media only screen and (min-width: 1024px) {
+    width: 100%;
+    vertical-align: top;
+    display: inline-block;
+  }
   h1 {
     font-weight: 500;
     color: black;
@@ -97,18 +101,26 @@ div.behalter {
 }
 
 div.ausgabebehalter {
-  vertical-align: top; // width: 100%;
   max-width: 600px;
   top: 50px;
   position: sticky;
-  display: inline-block;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  @media only screen and (min-width: 1024px) {
+    margin: 0;
+    display: inline-block;
+    vertical-align: top; // width: 100%;
+    width: initial;
+  }
   pre.ausgabe {
     color: #c66;
     font-size: 0.85rem;
     padding: .8rem 1rem;
     background-color: #1d1f21;
     // white-space: pre-line;
-    white-space: normal;
+    white-space: nowrap;
+    overflow-x: auto;
     span {
       &.kommentar {
         color: #969896;
@@ -161,7 +173,7 @@ button {
       width: 80%;
       z-index: -1;
       pointer-events: none;
-      box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+      box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
     }
     &::before {
       content: '';

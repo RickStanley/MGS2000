@@ -17,7 +17,7 @@ interface Lager {
   verbreitet?: string;
   eingabeAnzeigen: boolean;
   objekt?: Meta | Allgemeines;
-  isMeta: boolean;
+  istMeta: boolean;
   fuhrer?: boolean;
 }
 interface Standardeinstellugen {
@@ -38,7 +38,7 @@ export class App {
             inhalt: 'utf-8'
           },
           eingabeAnzeigen: false,
-          isMeta: true
+          istMeta: true
         },
         {
           etikette: 'Título',
@@ -48,7 +48,7 @@ export class App {
             typ: 'title'
           },
           eingabeAnzeigen: true,
-          isMeta: false,
+          istMeta: false,
           fuhrer: true
         },
         {
@@ -62,7 +62,7 @@ export class App {
             name: 'description'
           },
           eingabeAnzeigen: true,
-          isMeta: true,
+          istMeta: true,
           fuhrer: true
         },
         {
@@ -73,7 +73,7 @@ export class App {
           },
           verbreitet: 'image',
           eingabeAnzeigen: true,
-          isMeta: true,
+          istMeta: true,
           fuhrer: true
         },
         {
@@ -82,7 +82,7 @@ export class App {
           },
           verbreitet: 'title',
           eingabeAnzeigen: false,
-          isMeta: true,
+          istMeta: true,
           fuhrer: false
         },
         {
@@ -91,7 +91,7 @@ export class App {
           },
           verbreitet: 'description',
           eingabeAnzeigen: false,
-          isMeta: true,
+          istMeta: true,
           fuhrer: false
         },
         {
@@ -100,11 +100,18 @@ export class App {
           },
           verbreitet: 'image',
           eingabeAnzeigen: false,
-          isMeta: true,
+          istMeta: true,
           fuhrer: false
         }
       ]
     },
+    // {
+    //   title: 'Informação sobre o seu aplicativo iOS ou Android',
+    //   komment: this.komment('Mobile App para iOS & Android'),
+    //   lager: [
+        
+    //   ]
+    // },
     {
       title: 'Open Graph',
       komment: this.komment('Open Graph general (Facebook, Pinterest & Google+)'),
@@ -115,7 +122,7 @@ export class App {
           },
           verbreitet: 'title',
           eingabeAnzeigen: false,
-          isMeta: true,
+          istMeta: true,
           fuhrer: false
         },
         {
@@ -124,7 +131,7 @@ export class App {
           },
           verbreitet: 'description',
           eingabeAnzeigen: false,
-          isMeta: true,
+          istMeta: true,
           fuhrer: false
         },
         {
@@ -137,7 +144,7 @@ export class App {
             name: 'og:image'
           },
           eingabeAnzeigen: true,
-          isMeta: true
+          istMeta: true
         },
         {
           etikette: 'URL',
@@ -146,7 +153,7 @@ export class App {
             name: 'og:url'
           },
           eingabeAnzeigen: true,
-          isMeta: true
+          istMeta: true
         },
         {
           etikette: 'Nome do Site',
@@ -155,7 +162,7 @@ export class App {
             name: 'og:site_name'
           },
           eingabeAnzeigen: true,
-          isMeta: true
+          istMeta: true
         },
         {
           etikette: 'Locale',
@@ -164,7 +171,7 @@ export class App {
             name: 'og:locale'
           },
           eingabeAnzeigen: true,
-          isMeta: true
+          istMeta: true
         },
         {
           etikette: 'Vídeo',
@@ -173,7 +180,7 @@ export class App {
             name: 'og:video'
           },
           eingabeAnzeigen: true,
-          isMeta: true
+          istMeta: true
         },
         {
           etikette: 'Admins ID',
@@ -186,7 +193,7 @@ export class App {
             name: 'fb:admins'
           },
           eingabeAnzeigen: true,
-          isMeta: true
+          istMeta: true
         },
         {
           etikette: 'App ID',
@@ -199,7 +206,7 @@ export class App {
             name: 'fb:app_id'
           },
           eingabeAnzeigen: true,
-          isMeta: true
+          istMeta: true
         },
         {
           eingang: {
@@ -207,7 +214,7 @@ export class App {
             inhalt: 'website'
           },
           eingabeAnzeigen: false,
-          isMeta: true
+          istMeta: true
         },
         {
           eingang: {
@@ -215,7 +222,7 @@ export class App {
           },
           verbreitet: 'description',
           eingabeAnzeigen: false,
-          isMeta: true,
+          istMeta: true,
           fuhrer: false
         }
       ]
@@ -230,7 +237,7 @@ export class App {
           },
           verbreitet: 'title',
           eingabeAnzeigen: false,
-          isMeta: true,
+          istMeta: true,
           fuhrer: false
         },
         {
@@ -239,7 +246,7 @@ export class App {
           },
           verbreitet: 'description',
           eingabeAnzeigen: false,
-          isMeta: true,
+          istMeta: true,
           fuhrer: false
         },
         {
@@ -249,7 +256,7 @@ export class App {
             name: 'twitter:site'
           },
           eingabeAnzeigen: true,
-          isMeta: true
+          istMeta: true
         },
         {
           etikette: 'Alça do autor do artigo',
@@ -258,7 +265,7 @@ export class App {
             name: 'twitter:creator'
           },
           eingabeAnzeigen: true,
-          isMeta: true
+          istMeta: true
         },
         {
           etikette: 'Imagem de Pré-visualização',
@@ -270,19 +277,19 @@ export class App {
             name: 'twitter:image:src'
           },
           eingabeAnzeigen: true,
-          isMeta: true
+          istMeta: true
         },
         {
           etikette: 'Fonte de Video/Audio Player',
           platzhalter: 'https://www.youtube.com/embed/Vhh_GeBPOhs',
           darunter: {
-            text: 'HTTPS URL para um playr iFrame'
+            text: 'HTTPS URL para um player iFrame'
           },
           eingang: {
             name: 'twitter:player'
           },
           eingabeAnzeigen: true,
-          isMeta: true
+          istMeta: true
         },
         {
           eingang: {
@@ -290,7 +297,7 @@ export class App {
             inhalt: 'summary'
           },
           eingabeAnzeigen: false,
-          isMeta: true
+          istMeta: true
         }
       ]
     }
@@ -306,7 +313,7 @@ export class App {
   constructor() {
     Promise.all(this.standardeinstellungen.map(async einstellung => {
       try {
-        await Promise.all(einstellung.lager.map(async feld => feld.objekt = feld.isMeta ? new Meta(feld.eingang, feld.verbreitet) : new Allgemeines(feld.eingang)));
+        await Promise.all(einstellung.lager.map(async feld => feld.objekt = feld.istMeta ? new Meta(feld.eingang, feld.verbreitet) : new Allgemeines(feld.eingang)));
       } catch (error) { console.error(error) }
     })).catch(reason => console.error(reason));
   }
