@@ -41,6 +41,22 @@ export class App {
           istMeta: true
         },
         {
+          eingang: {
+            ['http-equiv']: 'X-UA-Compatible',
+            inhalt: 'IE=edge'
+          },
+          eingabeAnzeigen: false,
+          istMeta: true
+        },
+        {
+          eingang: {
+            name: 'viewport',
+            inhalt: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+          },
+          eingabeAnzeigen: false,
+          istMeta: true
+        },
+        {
           etikette: 'Título',
           platzhalter: 'Título da Página',
           verbreitet: 'title',
@@ -109,7 +125,7 @@ export class App {
     //   title: 'Informação sobre o seu aplicativo iOS ou Android',
     //   komment: this.komment('Mobile App para iOS & Android'),
     //   lager: [
-        
+
     //   ]
     // },
     {
@@ -339,5 +355,28 @@ export class App {
       self.classList.add('kopiert');
       setTimeout(() => self.classList.remove('kopiert'), 1500);
     }
+  }
+  export(self: HTMLElement): void {
+    const [startRegex, endRegex, entkommeZitate, Streifenlinien] = [/(<!--|<meta)/g, /(-->|">)/g, /(="|[A-z0-9]")/g, /\r?\n|\r/g];
+    let innererInhalt = this.aus.innerText.replace(startRegex, '\$space$1');
+    innererInhalt = innererInhalt.replace(endRegex, '$1\\n');
+    innererInhalt = innererInhalt.replace(entkommeZitate, (match): any => {
+      return `${match.split('')[0]}\\${match.split('')[1]}`;
+    });
+    innererInhalt = innererInhalt.replace(Streifenlinien, '');
+    const inhalt = `#!/bin/bash\nspace='\\ \\ \\ \\ ' \nSEO="${innererInhalt}"\nsed -i "/<\\/head>/i $SEO" $1`;
+    this.download('concat-seo.sh', inhalt);
+    self.classList.add('kopiert');
+    setTimeout(() => self.classList.remove('kopiert'), 1500);
+  }
+
+  download(filename: string, content: string): void {
+    let anchor = document.createElement('a');
+    anchor.setAttribute('href', `data:text/plain;charset=utf-8,${content}`);
+    anchor.setAttribute('download', filename);
+    anchor.style.display = 'none';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
   }
 }
