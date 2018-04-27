@@ -28,18 +28,19 @@ pre {
   font-family: monospace, monospace;
 }
 
-div.behalter {
-  //   max-width: 600px;
-  max-width: 600px;
+div.wrapper {
+  padding: 15px;
+  max-width: 1024px;
   margin: 0 auto;
-  text-align: left;
-  width: 90%;
-  display: block;
+  display: grid;
   @media only screen and (min-width: 1024px) {
-    width: 100%;
-    vertical-align: top;
-    display: inline-block;
+    grid-template-columns: 1fr 50%;
+    grid-gap: 2%;
   }
+}
+
+div.behalter {
+  text-align: left;
   h1 {
     font-weight: 500;
     color: black;
@@ -76,7 +77,7 @@ div.behalter {
       display: block;
       box-sizing: border-box;
       width: 100%;
-      height: 2.4375rem; // margin: 0 0 1rem;
+      height: 2.4375rem;
       margin: 0;
       padding: .5rem;
       border: 1px solid #959fa8;
@@ -101,24 +102,19 @@ div.behalter {
 }
 
 div.ausgabebehalter {
-  max-width: 600px;
-  top: 50px;
-  position: sticky;
-  width: 100%;
-  display: block;
-  margin: 0 auto;
+  grid-row: 2;
   @media only screen and (min-width: 1024px) {
-    margin: 0;
-    display: inline-block;
-    vertical-align: top; // width: 100%;
-    width: initial;
+    grid-row: 1;
+    grid-column: 2;
   }
+  position: sticky;
+  top: 50px;
+  align-self: start;
   pre.ausgabe {
     color: #c66;
     font-size: 0.85rem;
     padding: .8rem 1rem;
     background-color: #1d1f21;
-    // white-space: pre-line;
     white-space: nowrap;
     overflow-x: auto;
     span {
@@ -167,7 +163,6 @@ button {
       left: 0;
       margin: 0 auto;
       padding: 5px 0px;
-      // top: 44px;
       top: 8px;
       transition: top .2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       width: 80%;
@@ -177,7 +172,6 @@ button {
     }
     &::before {
       content: '';
-      // top: 36px;
       top: 10px;
       transition: top .2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       display: block;

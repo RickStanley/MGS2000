@@ -1,28 +1,30 @@
 <template>
-  <div class="behalter">
-    <h1>${pageTitle}</h1>
-    <div class="lager" repeat.for="einstellung of standardeinstellungen">
-      <h3>
-        ${einstellung.title}
-      </h3>
-      <label repeat.for="feld of einstellung.lager" if.bind="feld.eingabeAnzeigen">
-        ${feld.etikette}
-        <input type="text" value.bind="feld.objekt.inhalt" keyup.trigger="checkVerwandte(feld)" placeholder="${feld.platzhalter}">
-        <a tabindex="-1" class="${!feld.darunter.link ? 'help-text' : ''}" href="${feld.darunter.link ? feld.darunter.link : 'javascript:void(0)'}" target="_blank" if.bind="feld.darunter">${feld.darunter.text}</a>
-      </label>
+  <div class="wrapper">
+    <div class="behalter">
+      <h1>${pageTitle}</h1>
+      <div class="lager" repeat.for="einstellung of standardeinstellungen">
+        <h3>
+          ${einstellung.title}
+        </h3>
+        <label repeat.for="feld of einstellung.lager" if.bind="feld.eingabeAnzeigen">
+          ${feld.etikette}
+          <input type="text" value.bind="feld.objekt.inhalt" keyup.trigger="checkVerwandte(feld)" placeholder="${feld.platzhalter}">
+          <a tabindex="-1" class="${!feld.darunter.link ? 'help-text' : ''}" href="${feld.darunter.link ? feld.darunter.link : 'javascript:void(0)'}" target="_blank" if.bind="feld.darunter">${feld.darunter.text}</a>
+        </label>
+      </div>
     </div>
-  </div>
-  <div class="ausgabebehalter">
-    <pre class="ausgabe" ref="aus">
-      <template repeat.for="einstellung of standardeinstellungen">
-        <span class="kommentar">${einstellung.komment}</span>
-        <template repeat.for="feld of einstellung.lager">
-          <span class="wrapper" css="display: ${feld.objekt.inhalt != '' ? 'block' : 'none'};opacity: ${feld.objekt.inhalt != '' ? '1' : '0'};">
-              ${feld.objekt.angabe}<span class="meta-content" if.bind="feld.istMeta && feld.objekt.prafix.typWert != ''">"${feld.objekt.prafix.typWert}"</span>${feld.objekt.mittel}<span class="meta-content" if.bind="feld.istMeta">"${feld.objekt.inhalt}"</span><span class="default" if.bind="!feld.istMeta">${feld.objekt.inhalt}</span>${feld.objekt.ende}
-          </span>
+    <div class="ausgabebehalter">
+      <pre class="ausgabe" ref="aus">
+        <template repeat.for="einstellung of standardeinstellungen">
+          <span class="kommentar">${einstellung.komment}</span>
+          <template repeat.for="feld of einstellung.lager">
+            <span class="wrapper" css="display: ${feld.objekt.inhalt != '' ? 'block' : 'none'};opacity: ${feld.objekt.inhalt != '' ? '1' : '0'};">
+                ${feld.objekt.angabe}<span class="meta-content" if.bind="feld.istMeta && feld.objekt.prafix.typWert != ''">"${feld.objekt.prafix.typWert}"</span>${feld.objekt.mittel}<span class="meta-content" if.bind="feld.istMeta">"${feld.objekt.inhalt}"</span><span class="default" if.bind="!feld.istMeta">${feld.objekt.inhalt}</span>${feld.objekt.ende}
+            </span>
+          </template>
         </template>
-      </template>
-    </pre>
-    <button class="copy" click.trigger="kopieren($event.target)">Copiar</button>
+      </pre>
+      <button class="copy" click.trigger="kopieren($event.target)">Copiar</button>
+    </div>
   </div>
 </template>
