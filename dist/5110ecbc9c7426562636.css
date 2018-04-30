@@ -27,7 +27,8 @@ div.wrapper {
   padding: 15px;
   max-width: 1100px;
   margin: 0 auto;
-  display: grid; }
+  display: grid;
+  grid-template-columns: 100%; }
   @media only screen and (min-width: 1024px) {
     div.wrapper {
       grid-template-columns: 1fr 50%;
@@ -128,11 +129,62 @@ div.ausgabebehalter {
       transition: opacity .2s ease;
       opacity: 0;
       display: block; }
+  div.ausgabebehalter img, div.ausgabebehalter div.infobehalter {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer; }
+  div.ausgabebehalter img {
+    width: 100%; }
+  div.ausgabebehalter div.infobehalter {
+    width: 4%;
+    margin-top: 5px;
+    position: relative; }
+    div.ausgabebehalter div.infobehalter::after {
+      content: 'Como usar: \A$ ./concat-seo.sh arquivo.{php,html,*}';
+      position: absolute;
+      font-size: 12px;
+      left: -195px;
+      border-radius: 2px;
+      background-color: #098de6;
+      color: white;
+      text-align: left;
+      top: -40px;
+      pointer-events: none;
+      white-space: pre;
+      opacity: 0;
+      padding: 5px;
+      overflow: hidden;
+      -webkit-transition: top 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease;
+      transition: top 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease; }
+    div.ausgabebehalter div.infobehalter::before {
+      content: '';
+      opacity: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      height: 0;
+      border: 0 solid transparent;
+      border-left-width: 5px;
+      border-right-width: 5px;
+      border-top: 8px solid #098de6;
+      left: 5px;
+      top: -2px;
+      opacity: 0;
+      -webkit-transition: top 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease;
+      transition: top 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease; }
+    div.ausgabebehalter div.infobehalter:hover::after, div.ausgabebehalter div.infobehalter:focus::after {
+      opacity: 1;
+      top: -48px; }
+    div.ausgabebehalter div.infobehalter:hover::before, div.ausgabebehalter div.infobehalter:focus::before {
+      top: -10px;
+      opacity: 1; }
 
 button {
   width: 100%;
   position: relative; }
   button.copy {
+    display: inline-block;
+    vertical-align: middle;
     margin-top: 5px;
     cursor: pointer;
     border-radius: 2px;
@@ -187,4 +239,4 @@ button {
     button.copy.export::after {
       content: 'Exportado'; }
 
-/*# sourceMappingURL=app.3b028b1bb829a1f4af45.bundle.map*/
+/*# sourceMappingURL=app.3e8cc8225a09e2a8fec0.bundle.map*/

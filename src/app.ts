@@ -358,7 +358,7 @@ export class App {
   }
   export(self: HTMLElement): void {
     // startRegex for spaces of 4, endRegex for new lines, netkommeZitate to escape dobule quotations, Strifenlinen to strip pre-formated new lines
-    const [startRegex, endRegex, entkommeZitate, Streifenlinien] = [/(<!--|<meta)/g, /(-->|">|e><)/g, /(="|[A-z0-9]")/g, /\r?\n|\r/g];
+    const [startRegex, endRegex, entkommeZitate, Streifenlinien] = [/(<!--|<meta)/g, /(-->|">|e><)/g, /(="|[A-z0-9]"|[A-z0-9] ")/g, /\r?\n|\r/g];
     let innererInhalt = this.aus.innerText.replace(startRegex, '\$space$1');
     innererInhalt = innererInhalt.replace(endRegex, '$1\\n');
     innererInhalt = innererInhalt.replace(entkommeZitate, (match): any => {
