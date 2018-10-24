@@ -62,10 +62,11 @@ div.behalter {
     }
     a {
       color: #e040fb;
-      margin-top: -.5rem;
+      margin-top: .25rem;
       font-size: .85rem;
       font-style: italic;
-      line-height: 1.6;
+      line-height: normal;
+      display: block;
       text-rendering: optimizeLegibility;
       &.help-text {
         color: #959fa8;
@@ -74,7 +75,8 @@ div.behalter {
       }
     }
     input,
-    textarea {
+    textarea,
+    select {
       display: block;
       box-sizing: border-box;
       width: 100%;
@@ -98,6 +100,12 @@ div.behalter {
         box-shadow: 0 0 5px #ededed;
         transition: box-shadow .5s, border-color .25s ease-in-out;
       }
+    }
+    select {
+      background-repeat: no-repeat;
+      background-position: 98.5% 50%;
+      background-size: 3%;
+      background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221%22%20viewBox%3D%220%200%201000%201000%22%3E%3Cpath%20fill%3D%22%234e4e4e%22%20d%3D%22M10%20206l490%20588%20490-588H10z%22%2F%3E%3C%2Fsvg%3E');
     }
   }
 }
@@ -133,6 +141,10 @@ div.ausgabebehalter {
         transition: opacity .2s ease;
         opacity: 0;
         display: block;
+      }
+      &[contenteditable]:hover,
+      &[contenteditable]:focus {
+        color: lighten($color: #b5bd68, $amount: 25);
       }
     }
   }

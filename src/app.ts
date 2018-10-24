@@ -2,6 +2,12 @@ import './resources/scss/app.scss';
 import Meta from "./resources/models/meta";
 import Allgemeines from 'resources/models/Allgemeines';
 import { RouterConfiguration, Router } from "aurelia-router";
+import { PLATFORM } from 'aurelia-pal';
+
+interface Typ {
+  name: string;
+  options?: string | string[];
+}
 
 interface Lager {
   etikette?: string;
@@ -19,6 +25,7 @@ interface Lager {
   objekt?: Meta | Allgemeines;
   istMeta: boolean;
   fuhrer?: boolean;
+  typ?: Typ;
 }
 interface Standardeinstellugen {
   title: string;
@@ -27,7 +34,7 @@ interface Standardeinstellugen {
 }
 export class App {
   aus: HTMLElement;
-  pageTitle = 'MTG 2000';
+  pageTitle = 'MGS 2000';
   standardeinstellungen: Array<Standardeinstellugen> = [
     {
       title: 'Configurações Gerais',
@@ -64,6 +71,9 @@ export class App {
             typ: 'title'
           },
           eingabeAnzeigen: true,
+          typ: {
+            name: 'text'
+          },
           istMeta: false,
           fuhrer: true
         },
@@ -71,24 +81,48 @@ export class App {
           etikette: 'Descrição da Página',
           platzhalter: 'Descrição da Página',
           darunter: {
-            text: '150 caracteres para SEO, 200 caracteres para Twitter & Facebook'
+            text: 'Entre 150 até 255 caracteres'
           },
           verbreitet: 'description',
           eingang: {
             name: 'description'
           },
           eingabeAnzeigen: true,
+          typ: {
+            name: 'text'
+          },
           istMeta: true,
           fuhrer: true
         },
         {
+          etikette: 'Palavras Chave',
+          platzhalter: 'promoção,fim de ano,especial,especial de natal,der metzger meister',
+          darunter: {
+            text: 'Palavras chave separadas por vírgula e sem espaço no início e fim de cada. É aconselhado manter menos de 12 palavras chave'
+          },
+          eingang: {
+            name: 'keywords'
+          },
+          eingabeAnzeigen: true,
+          typ: {
+            name: 'text'
+          },
+          istMeta: true
+        },
+        {
           etikette: 'Imagem do Site',
           platzhalter: 'https://zumbeispiele.com/imagem.jpg',
+          darunter: {
+            text: 'URL para a imagem de compartilhamento'
+          },
           eingang: {
             name: 'image'
           },
           verbreitet: 'image',
           eingabeAnzeigen: true,
+          typ: {
+            name: 'text'
+          },
           istMeta: true,
           fuhrer: true
         },
@@ -134,7 +168,7 @@ export class App {
       lager: [
         {
           eingang: {
-            name: 'og:title'
+            property: 'og:title'
           },
           verbreitet: 'title',
           eingabeAnzeigen: false,
@@ -143,7 +177,7 @@ export class App {
         },
         {
           eingang: {
-            name: 'og:description'
+            property: 'og:description'
           },
           verbreitet: 'description',
           eingabeAnzeigen: false,
@@ -157,47 +191,66 @@ export class App {
             text: 'Dimensão recomendada: 1200px x 630px; dimensão mínima: 600px x 315px'
           },
           eingang: {
-            name: 'og:image'
+            property: 'og:image'
           },
           eingabeAnzeigen: true,
+          typ: {
+            name: 'text'
+          },
           istMeta: true
         },
         {
           etikette: 'URL',
           platzhalter: 'https://zumbeispiele.com',
+          darunter: {
+            text: 'URL permanente para a página, e.g, "http://www.fermen.to/funcionarios/stanley/"'
+          },
           eingang: {
-            name: 'og:url'
+            property: 'og:url'
           },
           eingabeAnzeigen: true,
+          typ: {
+            name: 'text'
+          },
           istMeta: true
         },
         {
           etikette: 'Nome do Site',
           platzhalter: 'Site Exemplo',
+          darunter: {
+            text: 'Se a página faz parte de um Web Site maior, usar um nome generalizado. e.g., "Fermen.to"'
+          },
           eingang: {
-            name: 'og:site_name'
+            property: 'og:site_name'
           },
           eingabeAnzeigen: true,
+          typ: {
+            name: 'text'
+          },
           istMeta: true
         },
         {
           etikette: 'Locale',
           platzhalter: 'pt_BR',
           eingang: {
-            name: 'og:locale'
+            property: 'og:locale',
+            inhalt: 'pt_BR'
           },
           eingabeAnzeigen: true,
-          istMeta: true
-        },
-        {
-          etikette: 'Vídeo',
-          platzhalter: 'https://www.zumbeispiele.com/video.avi',
-          eingang: {
-            name: 'og:video'
+          typ: {
+            name: 'text'
           },
-          eingabeAnzeigen: true,
           istMeta: true
         },
+        // {
+        //   etikette: 'Vídeo',
+        //   platzhalter: 'https://www.zumbeispiele.com/video.avi',
+        //   eingang: {
+        //     property: 'og:video'
+        //   },
+        //   eingabeAnzeigen: true,
+        //   istMeta: true
+        // },
         {
           etikette: 'Admins ID',
           platzhalter: 'Um ID de usuário do Facebook',
@@ -209,6 +262,9 @@ export class App {
             name: 'fb:admins'
           },
           eingabeAnzeigen: true,
+          typ: {
+            name: 'text'
+          },
           istMeta: true
         },
         {
@@ -222,19 +278,27 @@ export class App {
             name: 'fb:app_id'
           },
           eingabeAnzeigen: true,
+          typ: {
+            name: 'text'
+          },
           istMeta: true
         },
         {
+          etikette: 'Tipo da página',
           eingang: {
-            name: 'og:type',
+            property: 'og:type',
             inhalt: 'website'
           },
-          eingabeAnzeigen: false,
+          typ: {
+            name: 'select',
+            options: ['website', 'article']
+          },
+          eingabeAnzeigen: true,
           istMeta: true
         },
         {
           eingang: {
-            name: 'og:description'
+            property: 'og:description'
           },
           verbreitet: 'description',
           eingabeAnzeigen: false,
@@ -267,11 +331,14 @@ export class App {
         },
         {
           etikette: 'Alça do Editor',
-          platzhalter: '@editor_alça',
+          platzhalter: '@nome_site',
           eingang: {
             name: 'twitter:site'
           },
           eingabeAnzeigen: true,
+          typ: {
+            name: 'text'
+          },
           istMeta: true
         },
         {
@@ -281,6 +348,9 @@ export class App {
             name: 'twitter:creator'
           },
           eingabeAnzeigen: true,
+          typ: {
+            name: 'text'
+          },
           istMeta: true
         },
         {
@@ -290,27 +360,30 @@ export class App {
             text: 'Dimensão máxima: 1024px x 512px; dimensão mínima: 440px x 220px'
           },
           eingang: {
-            name: 'twitter:image:src'
+            name: 'twitter:image'
           },
           eingabeAnzeigen: true,
+          typ: {
+            name: 'text'
+          },
           istMeta: true
         },
-        {
-          etikette: 'Fonte de Video/Audio Player',
-          platzhalter: 'https://www.youtube.com/embed/Vhh_GeBPOhs',
-          darunter: {
-            text: 'HTTPS URL para um player iFrame'
-          },
-          eingang: {
-            name: 'twitter:player'
-          },
-          eingabeAnzeigen: true,
-          istMeta: true
-        },
+        // {
+        //   etikette: 'Fonte de Video/Audio Player',
+        //   platzhalter: 'https://www.youtube.com/embed/Vhh_GeBPOhs',
+        //   darunter: {
+        //     text: 'HTTPS URL para um player iFrame'
+        //   },
+        //   eingang: {
+        //     name: 'twitter:player'
+        //   },
+        //   eingabeAnzeigen: true,
+        //   istMeta: true
+        // },
         {
           eingang: {
             name: 'twitter:card',
-            inhalt: 'summary'
+            inhalt: 'summary_large_image'
           },
           eingabeAnzeigen: false,
           istMeta: true
@@ -323,7 +396,7 @@ export class App {
     this.router = router;
     config.title = 'Meta Tags Generator 2000';
     config.map([
-      { route: ['', 'home'], name: 'home', moduleId: './app' }
+      { route: ['', 'home'], name: 'home', moduleId: './app'},
     ]);
   }
   constructor() {
