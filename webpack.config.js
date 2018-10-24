@@ -17,7 +17,7 @@ const title = 'Meta Gear Solid 2000';
 const outDir = path.resolve(__dirname, project.platform.output);
 const srcDir = path.resolve(__dirname, 'src');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
-const baseUrl = '/';
+const baseUrl = '/fermento-meta';
 
 const cssRules = [
   { loader: 'css-loader' },
